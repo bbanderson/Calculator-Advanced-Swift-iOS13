@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
     
+    var displayArray = [String]()
+    var displayText = ""
+    
     
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
@@ -25,7 +28,11 @@ class ViewController: UIViewController {
         
         //What should happen when a number is entered into the keypad
     
+        if let currentPressedBtn = sender.currentTitle {
+            displayArray.append(currentPressedBtn)
+            displayText.append(currentPressedBtn)
+            displayLabel.text = displayText
+        }
     }
-
 }
 
