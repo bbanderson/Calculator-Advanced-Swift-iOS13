@@ -12,15 +12,24 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
     
-    var displayArray = [String]()
-    var displayText = ""
-    
-    
+    private var isChanged: Bool = true
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         
         //What should happen when a non-number button is pressed
     
+        isChanged = true
+        guard let number = Double(displayLabel.text!) else {fatalError()}
+        
+        if let calcMethod = sender.currentTitle {
+            if calcMethod == "+/-" {
+                displayLabel.text = "\(number * -1)"
+            } else if calcMethod == "AC" {
+                displayLabel.text = "0"
+            } else if calcMethod == "%" {
+                displayLabel.text = "\(number * 0.01)"
+            }
+        }
     }
 
     
@@ -29,9 +38,17 @@ class ViewController: UIViewController {
         //What should happen when a number is entered into the keypad
     
         if let currentPressedBtn = sender.currentTitle {
-            displayArray.append(currentPressedBtn)
-            displayText.append(currentPressedBtn)
-            displayLabel.text = displayText
+            if isChanged {
+                isChanged = false
+                displayLabel.text = currentPressedBtn
+            } else {
+                
+                if currentPressedBtn == "." {
+                    let
+                    floor(Double(displayLabel.text!)!)
+                }
+                displayLabel.text! += currentPressedBtn
+            }
         }
     }
 }
